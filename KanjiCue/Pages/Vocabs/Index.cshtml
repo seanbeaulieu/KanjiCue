@@ -1,0 +1,70 @@
+﻿@page
+@model KanjiCue.Pages.Vocabs.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<form>
+    <p>
+        Term: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+        
+        <select asp-for="VocabClass" asp-items="Model.VocabClasses">
+            <option value="">All</option>
+        </select>
+
+
+    </p>
+</form>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Vocab[0].Term)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vocab[0].Kanji)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vocab[0].English)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vocab[0].Class)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Vocab) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Term)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kanji)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.English)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Class)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
